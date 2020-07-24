@@ -1,65 +1,79 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        base-dropdown
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
+  <section
+    ref="parent"
+    class="container"
+  >
+    <BaseDropdown
+      :target="this.$refs"
+      :show.sync="show"
+      :closeOutside="closeOutside"
+      @toggleDropdownContent="show = !show"
+    >
+      <p
+        v-for="(option, idx) in options"
+        :key="idx"
+        class="item"
+      >
+        {{option.value}}
+      </p>
+    </BaseDropdown>
+    <BaseDropdown
+      :target="this.$refs"
+      :show.sync="show1"
+      :closeOutside="closeOutside"
+      @toggleDropdownContent="show1 = !show1"
+    >
+      <p
+        v-for="(option, idx) in options"
+        :key="idx"
+        class="item"
+      >
+        {{option.value}}
+      </p>
+    </BaseDropdown>
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+    import BaseDropdown from '~/components/BaseDropdown.vue'
 
-export default {
-  components: {
-    AppLogo
-  }
-}
+    export default {
+        components: {
+            BaseDropdown
+        },
+        data: () => ({
+            options: [
+                {
+                    value: "option 1"
+                },
+                {
+                    value: "option 2"
+                },
+                {
+                    value: "option 3"
+                }
+            ],
+            show: false,
+            show1: false,
+            closeOutside: true
+        })
+    }
 </script>
 
 <style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+  .container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    text-align: center;
+  }
 
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+  .item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    background-color: palevioletred;
+  }
 </style>
 
