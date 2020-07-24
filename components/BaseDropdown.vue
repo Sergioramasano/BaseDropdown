@@ -42,12 +42,7 @@
             popperClickEvent() {
                 this.$emit('toggleDropdownContent');
                 const popper = new Popper(this.button, this.dropdown, {
-                    placement: 'auto',
-                    modifiers: {
-                        offset: {
-                            offset: "0,5"
-                        }
-                    }
+                    placement: 'auto'
                 });
             },
             setCloseOutside() {
@@ -59,7 +54,7 @@
             }
         },
         beforeDestroy() {
-            window.removeEventListener('click');
+            window.removeEventListener('click', false);
         }
     }
 </script>
